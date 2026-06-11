@@ -13,20 +13,34 @@ class HolidayController extends Controller
     {
         $query = Holiday::orderBy('date', 'desc');
 
-        if ($request->filled('year')) {
-            $query->where('year', $request->year);
-        } else {
-            $query->where('year', now()->year);
-        }
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $query->where('year', $year);
 
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
 
+        $prevMonth = $month == 1 ? 12 : $month - 1;
+        $prevYear = $month == 1 ? $year - 1 : $year;
+        $nextMonth = $month == 12 ? 1 : $month + 1;
+        $nextYear = $month == 12 ? $year + 1 : $year;
+        $currentMonthName = \Carbon\Carbon::create()->month($month)->monthName;
+        $currentMonth = $month;
+        $currentYear = $year;
+        $firstDayOfMonth = \Carbon\Carbon::create($year, $month, 1)->dayOfWeek;
+        $daysInMonth = \Carbon\Carbon::create($year, $month, 1)->daysInMonth;
+
         $holidays = $query->paginate(15);
         $years = Holiday::selectRaw('DISTINCT year')->orderBy('year', 'desc')->pluck('year');
 
-        return view('holidays.index', compact('holidays', 'years'));
+        return view('holidays.index', compact(
+            'holidays', 'years',
+            'prevMonth', 'prevYear', 'nextMonth', 'nextYear',
+            'currentMonthName', 'currentMonth', 'currentYear',
+            'firstDayOfMonth', 'daysInMonth'
+        ));
     }
 
     public function create()

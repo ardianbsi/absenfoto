@@ -8,7 +8,7 @@
             <h2 class="page-title">Detail Absensi</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
-            <a href="{{ route('attendances.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('attendance.index') }}" class="btn btn-outline-secondary">
                 <i class="ti ti-arrow-left me-2"></i>Kembali
             </a>
         </div>
@@ -33,6 +33,13 @@
                 <div class="mt-2">
                     <span class="badge {{ $statusClasses[$attendance->status] ?? 'bg-secondary' }} fs-6">
                         {{ $statusLabels[$attendance->status] ?? $attendance->status }}
+                    </span>
+                    @php
+                        $typeClasses = ['wfo' => 'bg-blue', 'waf' => 'bg-green', 'wfh' => 'bg-indigo'];
+                        $typeLabels = ['wfo' => 'WFO', 'waf' => 'WAF', 'wfh' => 'WFH'];
+                    @endphp
+                    <span class="badge {{ $typeClasses[$attendance->attendance_type] ?? 'bg-secondary' }} fs-6 ms-1">
+                        {{ $typeLabels[$attendance->attendance_type] ?? $attendance->attendance_type }}
                     </span>
                 </div>
             </div>

@@ -36,13 +36,23 @@
                         <p class="display-6 fw-bold">{{ $attendance->duration_formatted }}</p>
                     </div>
                     <div class="mt-4">
-                        <a href="{{ route('attendances.my') }}" class="btn btn-primary">
+                        <a href="{{ route('attendance.my') }}" class="btn btn-primary">
                             <i class="ti ti-arrow-left me-2"></i>Lihat Riwayat
                         </a>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                @php
+                                    $typeClasses = ['wfo' => 'bg-blue', 'waf' => 'bg-green', 'wfh' => 'bg-indigo'];
+                                    $typeLabels = ['wfo' => 'WFO', 'waf' => 'WAF', 'wfh' => 'WFH'];
+                                    $type = $attendance->attendance_type ?? 'wfo';
+                                @endphp
+                                <span class="badge {{ $typeClasses[$type] ?? 'bg-secondary' }}">
+                                    {{ $typeLabels[$type] ?? 'WFO' }}
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </div>
 @else
     <div class="row justify-content-center" style="min-height: 70vh;">
@@ -69,7 +79,7 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('attendances.store-check-out', $attendance) }}" enctype="multipart/form-data" id="checkoutForm">
+                    <form method="POST" action="{{ route('attendance.store-check-out', $attendance) }}" enctype="multipart/form-data" id="checkoutForm">
                         @csrf
 
                         <div class="mb-3">

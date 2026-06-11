@@ -22,7 +22,7 @@
                         <span class="badge bg-success mt-3">Tepat Waktu</span>
                     @endif
                     <div class="mt-4">
-                        <a href="{{ route('attendances.my') }}" class="btn btn-primary">
+                        <a href="{{ route('attendance.my') }}" class="btn btn-primary">
                             <i class="ti ti-arrow-left me-2"></i>Kembali
                         </a>
                     </div>
@@ -52,10 +52,19 @@
                                     <p class="fw-bold mb-0">{{ $employee->shift?->start_time ? \Carbon\Carbon::parse($employee->shift->start_time)->format('H:i') : '08:00' }}</p>
                                 </div>
                             </div>
+                            <div class="mt-2">
+                                @php
+                                    $type = $employee->default_attendance_type ?? 'wfo';
+                                    $typeLabels = ['wfo' => ['label' => 'WFO', 'color' => 'bg-blue'], 'waf' => ['label' => 'WAF', 'color' => 'bg-green'], 'wfh' => ['label' => 'WFH', 'color' => 'bg-indigo']];
+                                @endphp
+                                <span class="badge {{ $typeLabels[$type]['color'] ?? 'bg-secondary' }}">
+                                    {{ $typeLabels[$type]['label'] ?? 'WFO' }}
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('attendances.store-check-in') }}" enctype="multipart/form-data" id="checkinForm">
+                    <form method="POST" action="{{ route('attendance.store-check-in') }}" enctype="multipart/form-data" id="checkinForm">
                         @csrf
 
                         <div class="mb-3">

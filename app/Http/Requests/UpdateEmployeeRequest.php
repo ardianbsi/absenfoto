@@ -31,6 +31,7 @@ class UpdateEmployeeRequest extends FormRequest
             'join_date'      => ['required', 'date'],
             'work_status'    => ['required', 'string', 'in:contract,permanent,intern,probation'],
             'shift_id'       => ['nullable', 'integer', 'exists:shifts,id'],
+            'default_attendance_type' => ['nullable', 'string', 'in:wfo,waf,wfh'],
             'photo'          => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }

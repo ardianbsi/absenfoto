@@ -25,74 +25,7 @@
 </head>
 <body>
     <div class="page">
-        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="{{ route('dashboard') }}">
-                        <span class="navbar-brand-image ti ti-fingerprint text-primary fs-1"></span>
-                        HRIS Absensi
-                    </a>
-                </h1>
-                <div class="collapse navbar-collapse" id="sidebar-menu">
-                    <ul class="navbar-nav pt-lg-3">
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-dashboard"></span>
-                                <span class="nav-link-title">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{ request()->routeIs('employees.*') ? 'active' : '' }}" href="#navbar-employees" data-bs-toggle="dropdown">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-users"></span>
-                                <span class="nav-link-title">Karyawan</span>
-                            </a>
-                            <div class="dropdown-menu" id="navbar-employees">
-                                <a class="dropdown-item" href="{{ route('employees.index') }}">Data Karyawan</a>
-                                <a class="dropdown-item" href="{{ route('employees.create') }}">Tambah Karyawan</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('departments.*') ? 'active' : '' }}" href="{{ route('departments.index') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-building"></span>
-                                <span class="nav-link-title">Departemen</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('positions.*') ? 'active' : '' }}" href="{{ route('positions.index') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-briefcase"></span>
-                                <span class="nav-link-title">Jabatan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{ request()->routeIs('shifts.*') ? 'active' : '' }}" href="#navbar-shifts" data-bs-toggle="dropdown">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-clock"></span>
-                                <span class="nav-link-title">Shift</span>
-                            </a>
-                            <div class="dropdown-menu" id="navbar-shifts">
-                                <a class="dropdown-item" href="{{ route('shifts.index') }}">Data Shift</a>
-                                <a class="dropdown-item" href="{{ route('shifts.schedule') }}">Jadwal Shift</a>
-                                <a class="dropdown-item" href="{{ route('shifts.assign') }}">Assign Shift</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('holidays.*') ? 'active' : '' }}" href="{{ route('holidays.index') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-calendar-event"></span>
-                                <span class="nav-link-title">Hari Libur</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('announcements.*') ? 'active' : '' }}" href="{{ route('announcements.index') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block ti ti-bell"></span>
-                                <span class="nav-link-title">Pengumuman</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        @include('partials.sidebar')
         <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
             <div class="container-fluid">
                 <div class="navbar-nav flex-row order-md-last">

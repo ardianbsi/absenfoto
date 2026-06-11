@@ -181,6 +181,19 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="text-secondary small">Mode Absen Default</div>
+                                                <div>
+                                                    @php
+                                                        $typeClasses = ['wfo' => 'bg-blue', 'waf' => 'bg-green', 'wfh' => 'bg-indigo'];
+                                                        $typeLabels = ['wfo' => 'WFO (Work From Office)', 'waf' => 'WAF (Work From Anywhere)', 'wfh' => 'WFH (Work From Home)'];
+                                                        $type = $employee->default_attendance_type ?? 'wfo';
+                                                    @endphp
+                                                    <span class="badge {{ $typeClasses[$type] }}">
+                                                        {{ $typeLabels[$type] }}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

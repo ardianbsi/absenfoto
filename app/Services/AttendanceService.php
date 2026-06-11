@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\AttendanceStatus;
+use App\Enums\AttendanceType;
 use App\Models\Attendance;
 use App\Models\Employee;
 use App\Models\Shift;
@@ -39,14 +40,18 @@ class AttendanceService
         $latitude = $data['latitude'] ?? null;
         $longitude = $data['longitude'] ?? null;
 
-        if ($latitude && $longitude) {
-            $distance = $this->calculateDistance(
-                $this->officeLatitude, $this->officeLongitude,
-                (float) $latitude, (float) $longitude
-            );
+        $attendanceType = $employee->default_attendance_type ?? AttendanceType::WFO->value;
 
-            if ($distance > $this->radiusMeters) {
-                throw new \RuntimeException('Anda berada di luar radius ' . $this->radiusMeters . ' meter dari lokasi kantor.');
+        if ($attendanceType === AttendanceType::WFO->value) {
+            if ($latitude && $longitude) {
+                $distance = $this->calculateDistance(
+                    $this->officeLatitude, $this->officeLongitude,
+                    (float) $latitude, (float) $longitude
+                );
+
+                if ($distance > $this->radiusMeters) {
+                    throw new \RuntimeException('Anda berada di luar radius ' . $this->radiusMeters . ' meter dari lokasi kantor.');
+                }
             }
         }
 
@@ -65,6 +70,7 @@ class AttendanceService
             'date'              => $today,
             'check_in'          => $checkInTime,
             'status'            => $statusData['status'],
+            'attendance_type'    => $attendanceType,
             'check_in_latitude'  => $latitude,
             'check_in_longitude' => $longitude,
             'check_in_photo'    => $photoPath,

@@ -8,6 +8,7 @@ use App\Models\ActivityLog;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Position;
+use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +59,9 @@ class EmployeeController extends Controller
                 $r->where('name', 'employee');
             });
         })->orderBy('full_name')->get();
+        $shifts = Shift::active()->orderBy('name')->get();
 
-        return view('employees.create', compact('departments', 'positions', 'managers'));
+        return view('employees.create', compact('departments', 'positions', 'managers', 'shifts'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -100,6 +102,7 @@ class EmployeeController extends Controller
                 'join_date' => $data['join_date'],
                 'work_status' => $data['work_status'],
                 'shift_id' => $data['shift_id'] ?? null,
+                'default_attendance_type' => $data['default_attendance_type'] ?? 'wfo',
                 'photo' => $photoPath,
                 'is_active' => true,
             ]);
@@ -146,8 +149,9 @@ class EmployeeController extends Controller
                     $r->where('name', 'employee');
                 });
             })->orderBy('full_name')->get();
+        $shifts = Shift::active()->orderBy('name')->get();
 
-        return view('employees.edit', compact('employee', 'departments', 'positions', 'managers'));
+        return view('employees.edit', compact('employee', 'departments', 'positions', 'managers', 'shifts'));
     }
 
     public function update(UpdateEmployeeRequest $request, $id)
@@ -185,6 +189,7 @@ class EmployeeController extends Controller
                 'join_date' => $data['join_date'],
                 'work_status' => $data['work_status'],
                 'shift_id' => $data['shift_id'] ?? null,
+                'default_attendance_type' => $data['default_attendance_type'] ?? 'wfo',
                 'photo' => $photoPath,
             ]);
 

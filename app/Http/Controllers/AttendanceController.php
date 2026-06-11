@@ -47,7 +47,7 @@ class AttendanceController extends Controller
         $attendances = $query->orderBy('created_at', 'desc')->paginate(20);
         $employees = Employee::active()->orderBy('full_name')->get();
 
-        return view('attendances.index', compact('attendances', 'employees'));
+        return view('attendance.index', compact('attendances', 'employees'));
     }
 
     public function checkIn()
@@ -62,7 +62,7 @@ class AttendanceController extends Controller
 
         $todayAttendance = $this->attendanceService->getTodayAttendance($employee);
 
-        return view('attendances.check-in', compact('employee', 'todayAttendance'));
+        return view('attendance.check-in', compact('employee', 'todayAttendance'));
     }
 
     public function storeCheckIn(CheckInRequest $request)
@@ -87,7 +87,7 @@ class AttendanceController extends Controller
                 'user_agent' => $request->userAgent(),
             ]);
 
-            return redirect()->route('attendances.my')
+            return redirect()->route('attendance.my')
                 ->with('success', 'Check-in berhasil pada ' . $attendance->check_in->format('H:i:s') . '.');
         } catch (\RuntimeException $e) {
             return back()->with('error', $e->getMessage());
@@ -100,7 +100,7 @@ class AttendanceController extends Controller
 
         $this->authorize('update', $attendance);
 
-        return view('attendances.check-out', compact('attendance'));
+        return view('attendance.check-out', compact('attendance'));
     }
 
     public function storeCheckOut(CheckOutRequest $request, $id)
@@ -124,7 +124,7 @@ class AttendanceController extends Controller
                 'user_agent' => $request->userAgent(),
             ]);
 
-            return redirect()->route('attendances.my')
+            return redirect()->route('attendance.my')
                 ->with('success', 'Check-out berhasil pada ' . $attendance->check_out->format('H:i:s') . '.');
         } catch (\RuntimeException $e) {
             return back()->with('error', $e->getMessage());
@@ -136,7 +136,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::with(['employee.user', 'employee.department', 'employee.position', 'approver', 'logs'])
             ->findOrFail($id);
 
-        return view('attendances.show', compact('attendance'));
+        return view('attendance.show', compact('attendance'));
     }
 
     public function myAttendance(Request $request)
@@ -166,6 +166,6 @@ class AttendanceController extends Controller
         $attendances = $query->orderBy('date', 'desc')->paginate(20);
         $todayAttendance = $this->attendanceService->getTodayAttendance($employee);
 
-        return view('attendances.my', compact('attendances', 'employee', 'todayAttendance'));
+        return view('attendance.my', compact('attendances', 'employee', 'todayAttendance'));
     }
 }

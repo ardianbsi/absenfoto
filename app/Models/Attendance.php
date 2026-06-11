@@ -19,6 +19,7 @@ class Attendance extends Model
         'check_in',
         'check_out',
         'status',
+        'attendance_type',
         'check_in_latitude',
         'check_in_longitude',
         'check_out_latitude',

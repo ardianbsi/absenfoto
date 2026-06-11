@@ -215,6 +215,14 @@
                                         @endif
                                     </select>
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Mode Absen Default</label>
+                                    <select class="form-select" name="default_attendance_type">
+                                        <option value="wfo" {{ old('default_attendance_type') == 'wfo' ? 'selected' : '' }}>WFO (Work From Office)</option>
+                                        <option value="waf" {{ old('default_attendance_type') == 'waf' ? 'selected' : '' }}>WAF (Work From Anywhere)</option>
+                                        <option value="wfh" {{ old('default_attendance_type') == 'wfh' ? 'selected' : '' }}>WFH (Work From Home)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

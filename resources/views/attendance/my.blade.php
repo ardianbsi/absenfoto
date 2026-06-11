@@ -9,11 +9,11 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
             @if(!$todayAttendance || !$todayAttendance->check_in)
-                <a href="{{ route('attendances.check-in') }}" class="btn btn-success">
+                <a href="{{ route('attendance.check-in') }}" class="btn btn-success">
                     <i class="ti ti-login me-2"></i>Check In
                 </a>
             @elseif(!$todayAttendance->check_out)
-                <a href="{{ route('attendances.check-out', $todayAttendance) }}" class="btn btn-warning">
+                <a href="{{ route('attendance.check-out', $todayAttendance) }}" class="btn btn-warning">
                     <i class="ti ti-logout me-2"></i>Check Out
                 </a>
             @endif
@@ -77,7 +77,7 @@
 
 <div class="card">
     <div class="card-body border-bottom">
-        <form method="GET" action="{{ route('attendances.my') }}" class="row g-3">
+        <form method="GET" action="{{ route('attendance.my') }}" class="row g-3">
             <div class="col-md-4">
                 <label class="form-label">Bulan</label>
                 <select name="month" class="form-select">
@@ -109,6 +109,7 @@
                     <th>Check In</th>
                     <th>Check Out</th>
                     <th>Status</th>
+                    <th>Tipe</th>
                     <th>Durasi</th>
                     <th>Telat</th>
                     <th class="w-1">Aksi</th>
@@ -129,6 +130,15 @@
                                 {{ $statusLabels[$attendance->status] ?? $attendance->status }}
                             </span>
                         </td>
+                        <td>
+                            @php
+                                $typeClasses = ['wfo' => 'bg-blue', 'waf' => 'bg-green', 'wfh' => 'bg-indigo'];
+                                $typeLabels = ['wfo' => 'WFO', 'waf' => 'WAF', 'wfh' => 'WFH'];
+                            @endphp
+                            <span class="badge {{ $typeClasses[$attendance->attendance_type] ?? 'bg-secondary' }}">
+                                {{ $typeLabels[$attendance->attendance_type] ?? $attendance->attendance_type }}
+                            </span>
+                        </td>
                         <td>{{ $attendance->duration_formatted ?? '-' }}</td>
                         <td>
                             @if($attendance->late_minutes > 0)
@@ -138,14 +148,14 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('attendances.show', $attendance) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('attendance.show', $attendance) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="ti ti-eye"></i>
                             </a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-4">
+                        <td colspan="8" class="text-center py-4">
                             <div class="empty">
                                 <div class="empty-icon"><i class="ti ti-clipboard-list fs-1"></i></div>
                                 <p class="empty-title">Belum ada absensi</p>

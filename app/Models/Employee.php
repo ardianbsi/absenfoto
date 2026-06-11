@@ -33,6 +33,7 @@ class Employee extends Model
         'work_status',
         'contract_end_date',
         'shift_id',
+        'default_attendance_type',
         'photo',
         'is_active',
     ];

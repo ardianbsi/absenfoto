@@ -202,10 +202,21 @@ class ShiftController extends Controller
     {
         $month = $request->input('month', now()->month);
         $year = $request->input('year', now()->year);
+
+        $prevMonth = $month == 1 ? 12 : $month - 1;
+        $prevYear = $month == 1 ? $year - 1 : $year;
+        $nextMonth = $month == 12 ? 1 : $month + 1;
+        $nextYear = $month == 12 ? $year + 1 : $year;
+        $currentMonthName = \Carbon\Carbon::create()->month($month)->monthName;
+        $currentYear = $year;
+
         $employees = Employee::active()->with('shift')->orderBy('full_name')->get();
         $shifts = Shift::active()->orderBy('name')->get();
 
-        return view('shifts.schedule', compact('month', 'year', 'employees', 'shifts'));
+        return view('shifts.schedule', compact(
+            'month', 'year', 'prevMonth', 'prevYear', 'nextMonth', 'nextYear',
+            'currentMonthName', 'currentYear', 'employees', 'shifts'
+        ));
     }
 
     public function getScheduleData(Request $request)
