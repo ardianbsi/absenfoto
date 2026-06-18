@@ -8,7 +8,7 @@
             <h2 class="page-title">Detail Lembur</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
-            <a href="{{ route('overtimes.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('overtime.index') }}" class="btn btn-outline-secondary">
                 <i class="ti ti-arrow-left me-2"></i>Kembali
             </a>
         </div>
@@ -137,7 +137,7 @@
             <div class="modal fade" id="approveModal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form method="POST" action="{{ route('overtimes.approve', $overtime) }}">
+                        <form method="POST" action="{{ route('overtime.approve', $overtime) }}">
                             @csrf
                             <input type="hidden" name="status" value="approved">
                             <div class="modal-header">
@@ -162,7 +162,7 @@
             <div class="modal fade" id="rejectModal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form method="POST" action="{{ route('overtimes.approve', $overtime) }}">
+                        <form method="POST" action="{{ route('overtime.approve', $overtime) }}">
                             @csrf
                             <input type="hidden" name="status" value="rejected">
                             <div class="modal-header">

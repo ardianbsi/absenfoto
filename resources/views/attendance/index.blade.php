@@ -9,10 +9,10 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-                <a href="{{ route('reports.export', ['type' => 'excel', 'date' => request('date', now()->toDateString())]) }}" class="btn btn-outline-success">
+                <a href="{{ route('reports.export-csv', ['type' => 'excel', 'date' => request('date', now()->toDateString())]) }}" class="btn btn-outline-success">
                     <i class="ti ti-file-spreadsheet me-2"></i>Excel
                 </a>
-                <a href="{{ route('reports.export', ['type' => 'pdf', 'date' => request('date', now()->toDateString())]) }}" class="btn btn-outline-danger">
+                <a href="{{ route('reports.export-csv', ['type' => 'pdf', 'date' => request('date', now()->toDateString())]) }}" class="btn btn-outline-danger">
                     <i class="ti ti-file-pdf me-2"></i>PDF
                 </a>
             </div>

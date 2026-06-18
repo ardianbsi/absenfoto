@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body border-bottom">
-        <form method="GET" action="{{ route('overtimes.index') }}" class="row g-3">
+        <form method="GET" action="{{ route('overtime.index') }}" class="row g-3">
             <div class="col-md-3">
                 <label class="form-label">Karyawan</label>
                 <select name="employee_id" class="form-select">
@@ -46,7 +46,7 @@
             </div>
             @if(request()->anyFilled(['employee_id', 'status', 'start_date', 'end_date']))
                 <div class="col-12">
-                    <a href="{{ route('overtimes.index') }}" class="btn btn-sm btn-outline-secondary">
+                    <a href="{{ route('overtime.index') }}" class="btn btn-sm btn-outline-secondary">
                         <i class="ti ti-x me-1"></i>Hapus Filter
                     </a>
                 </div>
@@ -96,7 +96,7 @@
                         <td>{{ Str::limit($overtime->description, 30) }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('overtimes.show', $overtime) }}" class="btn btn-sm btn-outline-primary">
+                                <a href="{{ route('overtime.show', $overtime) }}" class="btn btn-sm btn-outline-primary">
                                     <i class="ti ti-eye"></i>
                                 </a>
                                 @if($overtime->status === 'pending')
@@ -135,7 +135,7 @@
     <div class="modal fade" id="approveModal-{{ $overtime->id }}" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST" action="{{ route('overtimes.approve', $overtime) }}">
+                <form method="POST" action="{{ route('overtime.approve', $overtime) }}">
                     @csrf
                     <input type="hidden" name="status" value="approved">
                     <div class="modal-header">
@@ -160,7 +160,7 @@
     <div class="modal fade" id="rejectModal-{{ $overtime->id }}" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST" action="{{ route('overtimes.approve', $overtime) }}">
+                <form method="POST" action="{{ route('overtime.approve', $overtime) }}">
                     @csrf
                     <input type="hidden" name="status" value="rejected">
                     <div class="modal-header">

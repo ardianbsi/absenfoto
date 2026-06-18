@@ -8,7 +8,7 @@
             <h2 class="page-title">Ajukan Lembur</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
-            <a href="{{ route('overtimes.my') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('overtime.my') }}" class="btn btn-outline-secondary">
                 <i class="ti ti-arrow-left me-2"></i>Kembali
             </a>
         </div>
@@ -27,7 +27,7 @@
                 <h3 class="card-title">Form Lembur</h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('overtimes.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('overtime.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">

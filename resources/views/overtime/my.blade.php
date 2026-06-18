@@ -8,7 +8,7 @@
             <h2 class="page-title">Lembur Saya</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
-            <a href="{{ route('overtimes.create') }}" class="btn btn-primary">
+            <a href="{{ route('overtime.create') }}" class="btn btn-primary">
                 <i class="ti ti-plus me-2"></i>Ajukan Lembur
             </a>
         </div>
@@ -17,7 +17,7 @@
 
 <div class="card">
     <div class="card-body border-bottom">
-        <form method="GET" action="{{ route('overtimes.my') }}" class="row g-3">
+        <form method="GET" action="{{ route('overtime.my') }}" class="row g-3">
             <div class="col-md-4">
                 <label class="form-label">Status</label>
                 <select name="status" class="form-select">
@@ -77,7 +77,7 @@
                         </td>
                         <td>{{ Str::limit($overtime->description, 40) }}</td>
                         <td>
-                            <a href="{{ route('overtimes.show', $overtime) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('overtime.show', $overtime) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="ti ti-eye"></i>
                             </a>
                         </td>
@@ -89,7 +89,7 @@
                                 <div class="empty-icon"><i class="ti ti-clock-off fs-1"></i></div>
                                 <p class="empty-title">Belum ada pengajuan lembur</p>
                                 <p class="empty-subtitle text-secondary">Anda belum mengajukan lembur.</p>
-                                <a href="{{ route('overtimes.create') }}" class="btn btn-primary">
+                                <a href="{{ route('overtime.create') }}" class="btn btn-primary">
                                     <i class="ti ti-plus me-2"></i>Ajukan Lembur
                                 </a>
                             </div>

@@ -22,7 +22,7 @@
                 <h3 class="card-title">Informasi Profil</h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('settings.update-profile') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('settings.profile') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="text-center mb-4">

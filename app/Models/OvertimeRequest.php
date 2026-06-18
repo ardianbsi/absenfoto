@@ -30,6 +30,7 @@ class OvertimeRequest extends Model
         'date' => 'date',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'approved_at' => 'datetime',
     ];
 
     public function employee(): BelongsTo

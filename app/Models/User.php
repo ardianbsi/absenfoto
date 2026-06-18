@@ -39,6 +39,7 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_active' => 'boolean',
         'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime',
     ];
 
     protected $appends = ['role_name'];

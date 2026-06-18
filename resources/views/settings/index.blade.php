@@ -17,7 +17,7 @@
                 <h3 class="card-title">Profil</h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('settings.update-profile') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('settings.profile') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-auto">
@@ -60,7 +60,7 @@
                 <h3 class="card-title">Ubah Password</h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('settings.update-profile') }}">
+                <form method="POST" action="{{ route('settings.profile') }}">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Password Saat Ini</label>
@@ -91,7 +91,7 @@
                 <h3 class="card-title">Tema</h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('settings.update-theme') }}" id="themeForm">
+                <form method="POST" action="{{ route('settings.theme') }}" id="themeForm">
                     @csrf
                     <div class="d-flex align-items-center justify-content-between">
                         <div>

@@ -49,7 +49,7 @@ class OvertimeController extends Controller
         $overtimes = $query->orderBy('created_at', 'desc')->paginate(15);
         $employees = Employee::active()->orderBy('full_name')->get();
 
-        return view('overtimes.index', compact('overtimes', 'employees'));
+        return view('overtime.index', compact('overtimes', 'employees'));
     }
 
     public function create()
@@ -62,7 +62,7 @@ class OvertimeController extends Controller
                 ->with('error', 'Anda tidak terdaftar sebagai karyawan.');
         }
 
-        return view('overtimes.create', compact('employee'));
+        return view('overtime.create', compact('employee'));
     }
 
     public function store(StoreOvertimeRequest $request)
@@ -90,7 +90,7 @@ class OvertimeController extends Controller
                 'method' => $request->method(),
             ]);
 
-            return redirect()->route('overtimes.my')
+            return redirect()->route('overtime.my')
                 ->with('success', 'Pengajuan lembur berhasil dikirim.');
         } catch (\RuntimeException $e) {
             return back()->with('error', $e->getMessage())->withInput();
@@ -102,7 +102,7 @@ class OvertimeController extends Controller
         $overtime = OvertimeRequest::with(['employee.user', 'employee.department', 'employee.position', 'approver'])
             ->findOrFail($id);
 
-        return view('overtimes.show', compact('overtime'));
+        return view('overtime.show', compact('overtime'));
     }
 
     public function approve(ApproveOvertimeRequest $request, $id)
@@ -135,7 +135,7 @@ class OvertimeController extends Controller
                 ? 'Pengajuan lembur berhasil disetujui.'
                 : 'Pengajuan lembur berhasil ditolak.';
 
-            return redirect()->route('overtimes.index')
+            return redirect()->route('overtime.index')
                 ->with('success', $message);
         } catch (\RuntimeException $e) {
             return back()->with('error', $e->getMessage());
@@ -168,6 +168,6 @@ class OvertimeController extends Controller
 
         $overtimes = $query->orderBy('created_at', 'desc')->paginate(15);
 
-        return view('overtimes.my', compact('overtimes', 'employee'));
+        return view('overtime.my', compact('overtimes', 'employee'));
     }
 }
